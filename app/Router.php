@@ -61,7 +61,7 @@ class Router
 
     private function setRoute(string $method, string $path, $handler)
     {
-        $this->routes[$method] = [
+        $this->routes[$method][] = [
             'path' => $path,
             'handler' => $handler
         ];
@@ -76,6 +76,9 @@ class Router
         $requestPath = $requestUri['path'];
         $method = $_SERVER['REQUEST_METHOD'];
         $routes = $this->routes[$method] ?? [];
+
+        var_dump($this->routes);
+
         $callback = null;
         foreach ($routes as $route){
             if($route['path'] === $requestPath){

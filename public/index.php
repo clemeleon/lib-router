@@ -8,8 +8,16 @@ use App\Router;
 
 $router = new Router();
 
-$router->get('/home', function(){
+$router->get('/', function(){
     echo 'Home Page';
 });
 
-$router->process();
+$router->any(['GET', 'POST'], '/about', function(){
+    echo "This is about routing";
+});
+
+try {
+    $router->process();
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
