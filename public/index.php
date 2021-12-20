@@ -2,4 +2,8 @@
 
 declare(strict_types=1);
 
-echo 'hello';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use App\Router;
+
+$router = new Router();
