@@ -12,6 +12,11 @@ class Router
 
     private array $routes = [];
 
+    public function __construct()
+    {
+
+    }
+
     public function get(string $path, $handler): void
     {
         $this->setRoute("GET", $path, $handler);
@@ -91,7 +96,7 @@ class Router
         }
 
         call_user_func_array($callback, [
-            $_REQUEST
+            $_POST, $_GET
         ]);
     }
 }
