@@ -99,8 +99,8 @@ class Router
         var_dump($this->routes);
 
         $callback = null;
-        foreach ($routes as $route){
-            if($route['path'] === $requestPath){
+        foreach ($routes as $route) {
+            if ($route['path'] === $requestPath) {
                 $callback = $route['handler'];
             };
         }
@@ -109,8 +109,6 @@ class Router
             throw new Exception("Route not found!");
         }
 
-        call_user_func_array($callback, [
-            $this->getData($method)
-        ]);
+        call_user_func_array($callback, $this->getData($method));
     }
 }
