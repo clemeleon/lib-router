@@ -72,6 +72,20 @@ class Router
         ];
     }
 
+    private function getData(string $method): array
+    {
+        if ($method === "GET") {
+            return $_GET;
+        } elseif ($method === "POST" && count($_POST) > 0) {
+            return $_POST;
+        }
+        try {
+            return json_decode(file_get_contents("php://input"));
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
     /**
      * @throws Exception
      */
@@ -96,7 +110,7 @@ class Router
         }
 
         call_user_func_array($callback, [
-            $_POST, $_GET
+            $this->getData($method)
         ]);
     }
 }
