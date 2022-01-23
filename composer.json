@@ -6,15 +6,20 @@
         {
             "name": "M.O Akindayo",
             "email": "matthewakinse@gmail.com"
+        },
+        {
+            "name": "Clemeleon",
+            "email": "clemeleon@outlook.com"
         }
     ],
     "minimum-stability": "stable",
-    "require": {
-      "ext-json": "*"
-    },
+
     "autoload": {
         "psr-4": {
             "App\\": "app/"
         }
+    },
+    "require": {
+        "ext-json": "*"
     }
 }

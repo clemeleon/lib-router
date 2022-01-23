@@ -80,7 +80,7 @@ class Router
             return $_POST;
         }
         try {
-            return json_decode(file_get_contents("php://input"));
+            return json_decode(file_get_contents("php://input"), true);
         } catch (Exception $e) {
             return [];
         }
@@ -96,7 +96,7 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $routes = $this->routes[$method] ?? [];
 
-        var_dump($this->routes);
+        // var_dump($this->routes);
 
         $callback = null;
         foreach ($routes as $route) {
@@ -109,6 +109,6 @@ class Router
             throw new Exception("Route not found!");
         }
 
-        call_user_func_array($callback, $this->getData($method));
+        call_user_func_array($callback, [$this->getData($method)]);
     }
 }

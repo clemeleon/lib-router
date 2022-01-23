@@ -11,8 +11,9 @@ $router = new Router();
 $router->get('/', function(){
     echo 'Home Page';
 });
-
-$router->any(['GET', 'POST'], '/about', function(){
+// /about?name=john -> /about/name/john -> /about/john -> /about/:name
+$router->any(['GET', 'POST'], '/about', function(array $obj){
+    var_dump($obj);
     echo "This is about routing";
 });
 
