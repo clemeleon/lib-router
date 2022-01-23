@@ -72,6 +72,20 @@ class Router
         ];
     }
 
+    private function getData(string $method): array
+    {
+        if ($method === "GET") {
+            return $_GET;
+        } elseif ($method === "POST" && count($_POST) > 0) {
+            return $_POST;
+        }
+        try {
+            return json_decode(file_get_contents("php://input"));
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
     /**
      * @throws Exception
      */
@@ -85,8 +99,8 @@ class Router
         var_dump($this->routes);
 
         $callback = null;
-        foreach ($routes as $route){
-            if($route['path'] === $requestPath){
+        foreach ($routes as $route) {
+            if ($route['path'] === $requestPath) {
                 $callback = $route['handler'];
             };
         }
@@ -95,8 +109,6 @@ class Router
             throw new Exception("Route not found!");
         }
 
-        call_user_func_array($callback, [
-            $_POST, $_GET
-        ]);
+        call_user_func_array($callback, $this->getData($method));
     }
 }
